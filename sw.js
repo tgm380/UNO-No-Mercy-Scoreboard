@@ -1,4 +1,4 @@
-const CACHE='uno-no-mercy-v1-1';
+const CACHE='uno-no-mercy-v1-2';
 const ASSETS=[
 './','./index.html','./manifest.json','./apple-touch-icon.png','./icon-192.png','./icon-512.png',
 './discard-all.png','./skip-everyone.png','./draw-4.png','./draw-2.png','./reverse.png','./skip.png',
