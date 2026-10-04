@@ -114,7 +114,16 @@ function renderInputs(){
  const input=row.querySelector('input');input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const next=document.getElementById('name'+(i+1));if(next)next.focus();}});
  });}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function addPlayer(){if(state.players.length>=6)return;state.players.push({name:'P'+state.players.length+1,total:0,roundWins:0,active:true});renderInputs();}
+function addPlayer(){
+ if(state.players.length>=6)return;
+ const used=new Set(state.players.map(p=>String(p.name).trim()));
+ let n=1;
+ while(used.has('P'+n)) n++;
+ state.players.push({name:'P'+n,total:0,roundWins:0,active:true});
+ renderInputs();
+ const input=document.getElementById('name'+(state.players.length-1));
+ if(input){input.focus();input.select();}
+}
 function removePlayer(){if(state.players.length<=2)return;state.players.pop();renderInputs();}
 function removePlayerAt(i){if(state.players.length<=2)return;state.players.splice(i,1);state.players.forEach((p,j)=>{if(/^P\d+$/.test(p.name))p.name='P'+(j+1)});renderInputs();}
 function startGame(){
